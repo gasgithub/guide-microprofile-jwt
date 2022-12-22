@@ -12,6 +12,7 @@
 // end::copyright[]
 package io.openliberty.guides.system;
 
+import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -22,18 +23,35 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.annotation.security.RolesAllowed;
 
 import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @RequestScoped
 @Path("/properties")
 public class SystemResource {
 
-    @Inject
+    //@Inject
     // tag::claim[]
-    @Claim("groups")
+    //@Claim("groups")
     // end::claim[]
     // tag::rolesArray[]
-    private JsonArray roles;
+    private JsonArray roles; // = Json.createArrayBuilder().build(); 
     // end::rolesArray[]
+
+    @Inject
+    private void setRoles(JsonWebToken jwt) {
+        System.out.println("########Injecting groups");
+        if(jwt != null && jwt.getGroups() != null) {
+            System.out.println("######## jwt not null");
+            roles = Json.createArrayBuilder().build();
+            System.out.println(jwt.getGroups());
+            //(JsonArray)jwt.claim("groups").get();
+            roles = Json.createArrayBuilder(jwt.getGroups()).build();
+        }
+        else {
+            roles = Json.createArrayBuilder().build();
+        }
+    }
+
 
     @GET
     // tag::usernameEndpoint[]
@@ -69,5 +87,11 @@ public class SystemResource {
     // end::rolesAllowedAdminUser2[]
     public String getRoles() {
         return roles.toString();
+    }
+
+    @GET
+    @Path("/test")
+    public String getTest() {
+        return "Hello Service";
     }
 }

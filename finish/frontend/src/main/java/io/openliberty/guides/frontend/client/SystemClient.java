@@ -47,5 +47,12 @@ public interface SystemClient extends AutoCloseable {
     // tag::headerParam3[]
     String getJwtRoles(@HeaderParam("Authorization") String authHeader);
     // end::headerParam3[]
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_PLAIN)
+    // tag::headerParam3[]
+    String getTest(@HeaderParam("Authorization") String authHeader);
+    // end::headerParam3[]
 }
 // end::systemClient[]

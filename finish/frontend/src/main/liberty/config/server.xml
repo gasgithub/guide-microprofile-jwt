@@ -36,7 +36,6 @@
         <group name="myUsers">
             <member name="bob" />
             <member name="alice" />
-            <member name="carl" />
         </group>
     </basicRegistry>
 
@@ -47,6 +46,7 @@
             </security-role>
             <security-role name="user">
                 <group name="myUsers" />
+                <user name="carl" />
             </security-role>
         </application-bnd>
     </application>
@@ -57,6 +57,6 @@
     <jwtBuilder id="jwtFrontEndBuilder" issuer="http://openliberty.io" expiry="24h"/>
     
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
-
+    <httpSession invalidateOnUnauthorizedSessionRequestException="true"/>
 </server>
 <!-- end::jwt[] -->

@@ -7,4 +7,20 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+    <!-- if this section is added then no user can access service which is not correct, as any auth should be able to access.
+        See the binding in server.xml -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>all-resources</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>auth-user</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>auth-user</role-name>
+    </security-role>     
 </web-app>

@@ -73,4 +73,11 @@ public class ApplicationBean {
     }
     // end::getJwtRoles[]
 
+    public String getTest() {
+        String authHeader = getJwt();
+        // tag::authHeader3[]
+        return defaultRestClient.getTest(authHeader);
+        // end::authHeader3[]
+    }
+
 }

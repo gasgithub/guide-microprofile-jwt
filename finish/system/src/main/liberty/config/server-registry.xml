@@ -1,0 +1,18 @@
+    <basicRegistry id="basic" realm="WebRealm">
+    <user name="bob" password="{xor}PTA9Lyg7" />  <!-- bobpwd -->
+    <user name="alice" password="{xor}PjM2PDovKDs=" />  <!-- alicepwd -->
+    <user name="carl" password="{xor}PD4tMy8oOw==" />   <!-- carlpwd -->
+
+    <group name="myAdmins">
+        <member name="bob" />
+    </group>
+
+    <group name="myUsers">
+        <member name="bob" />
+        <member name="alice" />
+        <member name="carl" />
+    </group>
+</basicRegistry>
+
+<logging traceSpecification="io.openliberty.restfulWS30.appSecurity.*=all:com.ibm.ws.security.*=all:com.ibm.ws.webcontainer.security.*=all"/>             
+  
